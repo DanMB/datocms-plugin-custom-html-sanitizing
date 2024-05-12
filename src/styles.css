@@ -8,3 +8,19 @@
 .container > button:last-child {
 	margin-top: 3em;
 }
+
+.hint {
+	color: var(--light-body-color);
+	line-height: 1.2;
+	font-size: var(--font-size-s);
+	margin-top: calc(-10px + var(--spacing-s));
+}
+
+.hint ul {
+	margin: 0;
+	padding: 0;
+}
+
+.hint li {
+	list-style-type: none;
+}

@@ -23,9 +23,9 @@ connect({
 	renderConfigScreen(ctx) {
 		return render(<PluginConfigScreen ctx={ctx} />);
 	},
-	// renderFieldExtension(_fieldExtensionId, ctx) {
-	// 	render(<FieldAddon ctx={ctx} />);
-	// },
+	renderFieldExtension(_fieldExtensionId, ctx) {
+		render(<FieldAddon ctx={ctx} />);
+	},
 	renderManualFieldExtensionConfigScreen(_fieldExtensionId, ctx) {
 		render(<FieldConfigScreen ctx={ctx} />);
 	},
