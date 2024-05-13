@@ -1,19 +1,20 @@
-import { RenderConfigScreenCtx } from 'datocms-plugin-sdk';
-import { Button, Canvas, TextareaField, type TextareaInputChangeEventHandler } from 'datocms-react-ui';
+import type { RenderConfigScreenCtx } from 'datocms-plugin-sdk';
+import { Button, Canvas, TextareaField } from 'datocms-react-ui';
 import { useState } from 'react';
 
 export const PluginConfigScreen = ({ ctx }: { ctx: RenderConfigScreenCtx }) => {
 	const [config, setConfig] = useState<string>(JSON.stringify(ctx.plugin.attributes.parameters, null, 2));
 
-	const handleChange: TextareaInputChangeEventHandler = event => {
-		setConfig(event);
-	};
-
 	const handleSave = () => {
-		const data = JSON.parse(config);
-		ctx.updatePluginParameters(data);
-		setConfig(JSON.stringify(data, null, 2));
-		ctx.notice('Global settings updated successfully!');
+		try {
+			const data = JSON.parse(config);
+			ctx.updatePluginParameters(data);
+			setConfig(JSON.stringify(data, null, 2));
+			ctx.notice('Global settings updated successfully!');
+		} catch (e) {
+			console.error(e);
+			ctx.alert('Invalid JSON submitted. Settings not saved!');
+		}
 	};
 
 	return (
@@ -24,8 +25,10 @@ export const PluginConfigScreen = ({ ctx }: { ctx: RenderConfigScreenCtx }) => {
 					id={'global'}
 					name={'global'}
 					label='JSON config'
-					value={JSON.stringify(ctx.plugin.attributes.parameters, null, 2)}
-					onChange={handleChange}
+					value={config}
+					onChange={value => {
+						setConfig(value);
+					}}
 				/>
 				<Button buttonType='primary' onClick={handleSave}>
 					Save
