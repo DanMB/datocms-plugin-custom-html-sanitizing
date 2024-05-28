@@ -3,6 +3,7 @@ import { Canvas } from 'datocms-react-ui';
 import { defaultConfig, type Config } from '../utils/config';
 import { useEffect } from 'react';
 import { sanitize } from '../utils/xss';
+import { getValueFromPath } from '../utils/getValueFromPath';
 
 export const FieldAddon = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 	useEffect(() => {
@@ -12,11 +13,14 @@ export const FieldAddon = ({ ctx }: { ctx: RenderFieldExtensionCtx }) => {
 			...ctx.parameters,
 		};
 
-		const value = ctx.formValues[ctx.fieldPath];
-		const parsed = sanitize(value as string, config);
+		const value = getValueFromPath(ctx.formValues, ctx.fieldPath);
+		console.log(ctx.formValues, ctx.fieldPath, value)
+		if(value !== undefined) {
+			const parsed = sanitize(value as string, config);
 
-		if (parsed !== value) {
-			ctx.setFieldValue(ctx.fieldPath, parsed);
+			if (parsed !== value) {
+				ctx.setFieldValue(ctx.fieldPath, parsed);
+			}
 		}
 	}, [ctx.formValues[ctx.fieldPath]]);
 
