@@ -58,7 +58,7 @@ export const defaultConfig: Config = {
 		tr: ['rowspan', 'align', 'valign'],
 		col: ['align', 'valign', 'span', 'width'],
 		colgroup: ['align', 'valign', 'span', 'width'],
-		a: ['target', 'href', 'name'],
+		a: ['target', 'href', 'name', 'title'],
 		img: ['src', 'srcset', 'alt', 'width', 'height', 'loading'],
 	},
 	allowedStyles: [

@@ -1,9 +1,10 @@
 import xss from 'xss';
 import { Config } from './config';
 
-const emptyTags = /<[^>]+>\s*<\/[^>]+>/g;
-const startingWhitespace = /(?<=>)\s+/g;
-const endingWhitespace = /\s+(?=<)/g;
+const emptyTags = /<[^\/>]+>\s*<\/[^>]+>/g;
+const startingWhitespace = /(?<=>)\n+/g;
+const endingWhitespace = /\n+(?=<)/g;
+const breakTags = /<br\s*>/g;
 
 export const sanitize = (html: string, config: Config): string => {
 	/* Convert config allowedTags and allowedAttributes into XSS whitelist object */
@@ -46,7 +47,7 @@ export const sanitize = (html: string, config: Config): string => {
 
 			return value;
 		},
-	});
+	}).replaceAll(breakTags, '<br/>');
 
 	/* Trim content to remove whitespace at the start and end of elements */
 	if (config.shouldTrimContent) {
