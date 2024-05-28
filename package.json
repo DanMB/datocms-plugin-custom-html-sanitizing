@@ -1,6 +1,6 @@
 {
 	"name": "datocms-plugin-custom-html-sanitizing",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"author": "DanMB",
 	"homepage": "https://github.com/DanMB/datocms-plugin-custom-html-sanitizing",
 	"description": "Allow custom configuration for sanitizing HTML in DatoCMS",
